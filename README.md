@@ -4,7 +4,7 @@ Actividad de evaluación UT5.1 - 1º DAM Programación
 
 ## Descripción
 
-Aplicación de consola en Java que permite registrar usuarios, iniciar sesión y gestionar notas personales. Toda la información se guarda en ficheros de texto para que persista entre ejecuciones.
+Aplicación con interfaz gráfica (Java Swing) que permite registrar usuarios, iniciar sesión y gestionar notas personales. Toda la información se guarda en ficheros de texto para que persista entre ejecuciones.
 
 ## Funcionalidades
 
@@ -20,7 +20,8 @@ Aplicación de consola en Java que permite registrar usuarios, iniciar sesión y
 
 ```
 src/
-├── App.java              → Clase principal, menús y flujo del programa
+├── App.java              → Clase principal, lanza la interfaz gráfica
+├── MainGUI.java          → Interfaz gráfica con Java Swing
 ├── UserService.java      → Registro, login y gestión de users.txt
 ├── NoteService.java      → Crear, leer, buscar, editar y eliminar notas
 ├── Validator.java        → Validaciones de email y contraseña
@@ -49,9 +50,9 @@ java App
 ## Tecnologías usadas
 
 - Java (JDK 17+)
+- Java Swing para la interfaz gráfica
 - `java.nio.file` para lectura/escritura de ficheros
 - `try-with-resources` para gestionar los recursos
-- Scanner para la entrada por consola
 
 ## Validaciones
 
@@ -64,8 +65,8 @@ java App
 
 **users.txt** - cada línea tiene un usuario:
 ```
-email@ejemplo.com;contraseña123
-otrousuario@mail.com;clave456
+admin1234@gmail.com;admin1234 <-- EL creado de prueba.
+
 ```
 
 **notas.txt** - las notas se separan con `---`:
