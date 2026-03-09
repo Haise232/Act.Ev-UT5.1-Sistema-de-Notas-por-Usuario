@@ -55,10 +55,11 @@ public class UserService {
             return false;
         }
 
-        // Guardamos el usuario en el fichero
+        // Guardamos el usuario en el fichero con la contraseña hasheada
+        String passwordHash = Validator.hashPassword(password);
         try (BufferedWriter bw = Files.newBufferedWriter(archivoUsuarios,
                 StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
-            bw.write(email + ";" + password);
+            bw.write(email + ";" + passwordHash);
             bw.newLine();
         } catch (IOException e) {
             System.out.println("Error al guardar el usuario: " + e.getMessage());
@@ -91,13 +92,14 @@ public class UserService {
 
         email = email.trim().toLowerCase();
 
-        // Leemos el fichero linea a linea y comparamos
+        // Hasheamos la contraseña introducida y comparamos con la guardada
+        String passwordHash = Validator.hashPassword(password);
         try (BufferedReader br = Files.newBufferedReader(archivoUsuarios)) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] partes = linea.split(";");
                 if (partes.length == 2) {
-                    if (partes[0].equals(email) && partes[1].equals(password)) {
+                    if (partes[0].equals(email) && partes[1].equals(passwordHash)) {
                         return true;
                     }
                 }
